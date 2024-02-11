@@ -62,9 +62,7 @@ public class controlPlayer : MonoBehaviour
         int nextY = playerY + deltaY;
 
         // Check if the next position is within the bounds of the grid and is not a wall (value 0)
-        if (nextX >= 0 && nextX < setSceneLVL1.levelLayout.GetLength(1) &&
-            nextY >= 0 && nextY < setSceneLVL1.levelLayout.GetLength(0) &&
-            setSceneLVL1.levelLayout[nextY, nextX] != 0)
+        if (nextX >= 0 && nextX < setSceneLVL1.levelLayout.GetLength(1) && nextY >= 0 && nextY < setSceneLVL1.levelLayout.GetLength(0) && setSceneLVL1.levelLayout[nextY, nextX] != 0)
         {
             // Update the player's current position
             playerX = nextX;
@@ -88,6 +86,11 @@ public class controlPlayer : MonoBehaviour
                 // Load the "Win" scene
                 SceneManager.LoadScene("Level 1");
             }
+        }
+        else if (setSceneLVL1.levelLayout[nextY, nextX] == 0)
+        {
+            setSceneLVL1.discoveredTiles[nextY, nextX] = 1;
+            setSceneLVL1.MarkDiscover();
         }
     }
 }

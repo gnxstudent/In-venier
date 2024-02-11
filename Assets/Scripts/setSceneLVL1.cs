@@ -9,8 +9,6 @@ public class setSceneLVL1 : MonoBehaviour
     public static int[,] discoveredTiles; // Declare the discovered tiles array
     public static GameObject[,] gridTiles; // Array to store references to grid tiles
 
-    public static GameObject Victory;
-
     [SerializeField] private TextAsset layoutLevel; // The text file containing the level layout
     [SerializeField] private GameObject tilePrefab; // The prefab to instantiate
     [SerializeField] private Camera mainCamera; // Reference to the main camera
@@ -104,14 +102,15 @@ public class setSceneLVL1 : MonoBehaviour
                         tile.GetComponent<Renderer>().material.color = Color.red;
                         break;*/
                     case 2: // Green for 2 THIS IS NOW USED SO THAT THE SQUARE UNDER THE PLAYER AT START IS ALSO MAGENTA
-                        tile.GetComponent<Renderer>().material.color = Color.magenta;
+                        tile.GetComponent<Renderer>().material.color = Color.yellow;
                         break;
-                    case 3: // Yellow for 3
+                    /*case 3: // Yellow for 3
                         Victory = tile;
-                        break;
-                    /*default:
-                        // Handle other cases or errors as needed
                         break;*/
+                    default:
+                        // Handle other cases or errors as needed
+                        tile.GetComponent<Renderer>().material.color = Color.black;
+                        break;
                 }
 
                 // Store the reference to the instantiated tile in the gridTiles array
@@ -153,9 +152,13 @@ public class setSceneLVL1 : MonoBehaviour
                 if (discoveredTiles[y, x] == 1)
                 {
                     // Change the color of the corresponding tile in the gridTiles array to pink
-                    if (gridTiles[y, x] != null)
+                    if (setSceneLVL1.levelLayout[y, x] == 1 || setSceneLVL1.levelLayout[y, x] == 2)
                     {
-                        gridTiles[y, x].GetComponent<Renderer>().material.color = Color.magenta;
+                        gridTiles[y, x].GetComponent<Renderer>().material.color = Color.white;
+                    }
+                    else if (setSceneLVL1.levelLayout[y, x] == 0)
+                    {
+                        gridTiles[y, x].GetComponent<Renderer>().material.color = Color.gray;
                     }
                 }
             }
